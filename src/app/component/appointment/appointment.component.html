@@ -1,5 +1,5 @@
-<h2 mat-dialog-title>Create an appointment</h2>
-<form #appForm="ngForm">
+<h2 >Create an appointment</h2>
+<!--<form #appForm="ngForm">-->
 
 
     <div class="flex flex-wrap">
@@ -10,8 +10,8 @@
       </mat-form-field>
 
       <mat-form-field class="w-2/3 px-1.5">
-        <mat-label>Recurrencies</mat-label>
-        <mat-select [(ngModel)]="appointment.recurrency" name="recurrency" required>
+        <mat-label>Recurrences</mat-label>
+        <mat-select [(ngModel)]="appointment.recurrency" name="recurrent" required>
           <mat-option *ngFor="let r of RecurrenciesMapping | keyvalue"
                       [value]="r.key">{{r.value}}</mat-option>
 
@@ -51,8 +51,8 @@
 
 
 
-    <a  routerLink="/appointment"  mat-raised-button color="warn" >Voltar</a>
+<!--    <a  routerLink="/appointment"  mat-raised-button color="warn" >Voltar</a>-->
 
     <button mat-raised-button color="primary" (click)="save(appointment)" >Salvar</button>
 
-</form>
+<!--</form>-->

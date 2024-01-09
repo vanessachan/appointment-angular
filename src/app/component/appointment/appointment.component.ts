@@ -5,9 +5,11 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSelectModule} from "@angular/material/select";
-import {KeyValuePipe} from "@angular/common";
+import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatNativeDateModule} from "@angular/material/core";
 
 @Component({
   selector: 'app-appointment',
@@ -15,20 +17,25 @@ import {RouterLink} from "@angular/router";
   templateUrl: './appointment.component.html',
   imports: [
     MatInputModule,
+    MatFormFieldModule,
     FormsModule,
     MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
     MatSelectModule,
     KeyValuePipe,
     MatButtonModule,
-    RouterLink
+    RouterLink,
+    NgForOf,
+    NgIf
   ],
   styleUrls: ['./appointment.component.css']
 })
-export class AppointmentComponent implements OnInit{
+export class AppointmentComponent implements OnInit {
 
   public RecurrenciesMapping = RecurrencyMapping;
   appointments: Appointment[] = [];
-  appointment=new Appointment();
+  appointment = new Appointment();
 
   ngOnInit(): void {
   }
@@ -37,7 +44,7 @@ export class AppointmentComponent implements OnInit{
   save(appointment: Appointment) {
     //this.appointmentService.saveAppointment(appointment).subscribe(app => {
     //  this.refreshList();
-   // });
+    // });
   }
 
 
