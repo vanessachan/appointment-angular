@@ -7,14 +7,15 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSelectModule} from "@angular/material/select";
 import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatNativeDateModule} from "@angular/material/core";
+import {AppointmentService} from "../../service/appointment.service";
 
 @Component({
-  selector: 'app-appointment',
+  selector: 'app-create-appointment',
   standalone: true,
-  templateUrl: './appointment.component.html',
+  templateUrl: './create-appointment.component.html',
   imports: [
     MatInputModule,
     MatFormFieldModule,
@@ -29,9 +30,9 @@ import {MatNativeDateModule} from "@angular/material/core";
     NgForOf,
     NgIf
   ],
-  styleUrls: ['./appointment.component.css']
+  styleUrls: ['./create-appointment.component.css']
 })
-export class AppointmentComponent implements OnInit {
+export class CreateAppointmentComponent implements OnInit {
 
   public RecurrenciesMapping = RecurrencyMapping;
   appointments: Appointment[] = [];
@@ -40,11 +41,15 @@ export class AppointmentComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  constructor(private appointmentService: AppointmentService,private router: Router,){
+
+  }
+
 
   save(appointment: Appointment) {
-    //this.appointmentService.saveAppointment(appointment).subscribe(app => {
-    //  this.refreshList();
-    // });
+    this.appointmentService.saveAppointment(appointment).subscribe(app => {
+      this.router.navigate(['']);
+    });
   }
 
 

@@ -1,0 +1,76 @@
+<div class="flex flex-col">
+  <div class="basis-1/2">
+    <mat-toolbar color="primary">
+      <span>My Appointments</span>
+      <mat-icon matBadgeSize="medium" matBadge="{{i}}" [matBadgeHidden]="i==0"
+                (click)="toggleBadgeVisibility()" aria-hidden="false"
+                matBadgeColor="warn">
+        <icon-svg-bell></icon-svg-bell>
+      </mat-icon>
+    </mat-toolbar>
+  </div>
+
+</div>
+<div class="flex flex-row">
+  <div class="basis-full">
+    <button mat-button color="primary" routerLink="/create">Create an appointment</button>
+  </div>
+</div>
+<div class="flex flex-row">
+
+  <div class="basis-full">
+    <div *ngFor="let app of appointments">
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{app.name}}
+            </mat-panel-title>
+            <mat-card-subtitle> Time: {{app.time}}
+
+            </mat-card-subtitle>
+            <mat-panel-description>
+              {{app.description}}
+
+            </mat-panel-description>
+
+          </mat-expansion-panel-header>
+
+          <div class="basis-full">
+
+            <p>From {{app.startDate | date:'YYYY/MM/dd'}} to {{app.stopDate | date:'YYYY/MM/dd'}} </p>
+          </div>
+          <br>
+          <div class="basis-full">
+
+            <p>Recurrency {{RecurrenciesMapping[app.recurrency]}}  {{app.recurrencyPersonalized}}</p>
+          </div>
+          <div class="flex flex-row">
+            <div class="basis-0">
+              <button mat-stroked-button color="primary">Edit</button>
+            </div>
+            <div class="basis-0">
+              <button mat-stroked-button color="primary" (click)="edit(app.id)">Edit Component</button>
+            </div>
+            <div class="basis-0 pl-1">
+              <button mat-stroked-button color="warn" (click)="delete(app.id)" >Delete</button>
+            </div>
+          </div>
+          <!-- <p *ngIf="app.recurrencyPersonalized?.toString()!='null'?app.recurrencyPersonalized+ 'days':''"></p>-->
+
+
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
