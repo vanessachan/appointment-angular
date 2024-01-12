@@ -47,10 +47,7 @@
           </div>
           <div class="flex flex-row">
             <div class="basis-0">
-              <button mat-stroked-button color="primary">Edit</button>
-            </div>
-            <div class="basis-0">
-              <button mat-stroked-button color="primary" (click)="edit(app.id)">Edit Component</button>
+              <button mat-stroked-button color="primary" routerLink="/appointment/{{app.id}}">Edit</button>
             </div>
             <div class="basis-0 pl-1">
               <button mat-stroked-button color="warn" (click)="delete(app.id)" >Delete</button>

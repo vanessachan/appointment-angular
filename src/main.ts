@@ -13,6 +13,7 @@ import {provideAnimations} from "@angular/platform-browser/animations";
 import {WebSocketApi} from "./app/websocket/web-socket-api";
 import {errorCatchingInterceptor} from "./app/interceptors/error-catching.intercetor";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {urlInterceptor} from "./app/interceptors/url-interceptor";
 export const appConfig: ApplicationConfig = {
   providers:[
     provideRouter(
@@ -22,7 +23,7 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withViewTransitions(),
     ),
-    provideHttpClient(withInterceptors([errorCatchingInterceptor])),
+    provideHttpClient(withInterceptors([errorCatchingInterceptor,urlInterceptor])),
     importProvidersFrom(MatSnackBarModule),
 
     provideAnimations(),

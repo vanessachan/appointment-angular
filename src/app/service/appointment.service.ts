@@ -8,7 +8,6 @@ import {Observable} from "rxjs";
 })
 export class AppointmentService {
 
- // url:string="/appointment";
   url='/appointment';
   constructor(private httpClient:HttpClient) { }
 

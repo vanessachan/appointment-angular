@@ -7,7 +7,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSelectModule} from "@angular/material/select";
 import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
-import {Router, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatNativeDateModule} from "@angular/material/core";
 import {AppointmentService} from "../../service/appointment.service";
@@ -39,9 +39,15 @@ export class CreateAppointmentComponent implements OnInit {
   appointment = new Appointment();
 
   ngOnInit(): void {
+    this.activatedRoute.data.subscribe(
+      ({appointment})=>{
+        if(appointment!=undefined)
+          this.appointment=appointment;
+      }
+    )
   }
 
-  constructor(private appointmentService: AppointmentService,private router: Router,){
+  constructor(private appointmentService: AppointmentService,private router: Router,private activatedRoute: ActivatedRoute){
 
   }
 

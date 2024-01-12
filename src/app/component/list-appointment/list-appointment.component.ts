@@ -4,7 +4,7 @@ import {MatCardModule} from "@angular/material/card";
 import {DatePipe, NgForOf} from "@angular/common";
 import {RecurrencyMapping} from "../../model/RecurrencyEnum";
 import {Appointment} from "../../model/Appointment";
-import {Subscription} from "rxjs";
+import {interval, Subscription} from "rxjs";
 import {Router, RouterLink} from "@angular/router";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {AppointmentService} from "../../service/appointment.service";
@@ -50,15 +50,31 @@ export class ListAppointmentComponent implements OnInit{
   private names: string[] = [];
 
   ngOnInit(): void {
-   // this.initializeSocketConnection();
-
     this.refreshList();
+    console.log("ngOinit"+"inicio");
+    this.webSocketApi._connect();
+
+    this.webSocketApi.onMessage.subscribe(message => {
+      this.notify(message);
+      this.names.push(message);
+    });
+
+    // this.mySub = interval(8000).subscribe((func => {
+    //   if (!this.hidden && this.i > 0) {
+    //     console.log("tam interval"+this.names.length);
+    //
+    //     let name = this.names.join(', ')
+    //
+    //     this.notify(name);
+    //
+    //   }
+    // }))
+
+    console.log("ngOinit"+"fim");
 
 
   }
-  ngOnDestroy() {
-    this.disconnectSocket();
-  }
+
 
   constructor(private appointmentService: AppointmentService,
               private snackBar: MatSnackBar,
@@ -71,21 +87,7 @@ export class ListAppointmentComponent implements OnInit{
 
     this.appointmentService.getAppointments().subscribe(value => this.appointments = value);
   }
-  // Initializes socket connection
-  initializeSocketConnection() {
-    this.webSocketApi.connectSocket('message');
-  }
-  // Receives response from socket connection
-  receiveSocketResponse() {
-    this.webSocketApi.receiveStatus().subscribe((receivedMessage) => {
-      console.log(receivedMessage);
-    });
-  }
 
-  // Disconnects socket connection
-  disconnectSocket() {
-    this.webSocketApi.disconnectSocket();
-  }
 
   notify(message: string) {
     this.snackBar.open(message, "It's time!!");
@@ -97,7 +99,7 @@ export class ListAppointmentComponent implements OnInit{
   toggleBadgeVisibility() {
     this.hidden = !this.hidden;
     this.i = 0;
-    this.hidden = false;
+   // this.hidden = false;
     this.snackBar.ngOnDestroy()
     this.names = [];
   }
@@ -112,9 +114,6 @@ export class ListAppointmentComponent implements OnInit{
   }
 
 
-  edit(id: number | undefined) {
-    this.router.navigate(['appointment',id])
-  }
 
 
 
