@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {RecurrencyEnum, RecurrencyMapping} from "../../model/RecurrencyEnum";
 import {Appointment} from "../../model/Appointment";
 import {MatInputModule} from "@angular/material/input";
@@ -35,16 +35,12 @@ import {AppointmentService} from "../../service/appointment.service";
 export class CreateAppointmentComponent implements OnInit {
 
   public RecurrenciesMapping = RecurrencyMapping;
-  appointments: Appointment[] = [];
-  appointment = new Appointment();
+  @Input()
+  appointment: Appointment=new Appointment();
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(
-      ({appointment})=>{
-        if(appointment!=undefined)
-          this.appointment=appointment;
-      }
-    )
+
+
   }
 
   constructor(private appointmentService: AppointmentService,private router: Router,private activatedRoute: ActivatedRoute){
