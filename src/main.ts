@@ -14,6 +14,9 @@ import {WebSocketApi} from "./app/websocket/web-socket-api";
 import {errorCatchingInterceptor} from "./app/interceptors/error-catching.intercetor";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {urlInterceptor} from "./app/interceptors/url-interceptor";
+import {AngularFireAuth, AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {AngularFireModule} from "@angular/fire/compat";
+import {firebaseConfig} from "./environments/environment";
 export const appConfig: ApplicationConfig = {
   providers:[
     provideRouter(
@@ -24,7 +27,8 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions(),
     ),
     provideHttpClient(withInterceptors([errorCatchingInterceptor,urlInterceptor])),
-    importProvidersFrom(MatSnackBarModule),
+    importProvidersFrom(MatSnackBarModule, AngularFireModule.initializeApp(firebaseConfig),
+      AngularFireAuthModule),
 
     provideAnimations(),
     WebSocketApi,

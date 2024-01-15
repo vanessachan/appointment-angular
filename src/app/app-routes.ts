@@ -2,12 +2,15 @@ import {CreateAppointmentComponent} from "./component/create-appointment/create-
 import {ListAppointmentComponent} from "./component/list-appointment/list-appointment.component";
 import {appointmentCreateResolver, appointmentEditResolver} from "./resolvers/appointment-resolver";
 import {Routes} from "@angular/router";
+import {LoginComponent} from "./component/login/login.component";
 
 
 
 export const routes: Routes = [
-  {path:'', component:ListAppointmentComponent},
+  {path:'list', component:ListAppointmentComponent},
   {path:'create', component:CreateAppointmentComponent, resolve:{appointment:appointmentCreateResolver}},
-  { path:'appointment/:id', component:CreateAppointmentComponent, resolve:{appointment:appointmentEditResolver}}
+  { path:'appointment/:id', component:CreateAppointmentComponent, resolve:{appointment:appointmentEditResolver}},
+  { path:'', component:LoginComponent},
+
 ];
 
