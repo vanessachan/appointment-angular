@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {AuthService} from "../../service/auth.service";
+import {Login} from "../../model/Login";
 
 @Component({
   selector: 'app-login',
@@ -23,13 +24,13 @@ import {AuthService} from "../../service/auth.service";
 export class LoginComponent {
 
   hide = true;
-  email="";
-  password="";
+  login:Login=new Login();
 
   constructor(private authService: AuthService) { }
 
-  login(email: string, password: string) {
-    this.authService.login(email, password);
+  doLogin(login:Login) {
+    console.log("login component");
+    this.authService.login(login);
   }
 
 

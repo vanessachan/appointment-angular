@@ -113,8 +113,4 @@ export class ListAppointmentComponent implements OnInit{
     }
   }
 
-
-
-
-
 }
